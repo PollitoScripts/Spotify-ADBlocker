@@ -69,15 +69,13 @@ def quit_action(icon, item):
 
 # Crear un icono simple (un cuadrado verde)
 def create_image():
-    # Intenta cargar el archivo logo.ico, si no existe usa el cuadro verde de antes
-    try:
-        return Image.open("pollito_discord_CON_MARCA_DE_AGUA.ico")
-    except:
-        image = Image.new('RGB', (64, 64), color=(30, 215, 96))
-        return image
+    image = Image.new('RGB', (64, 64), color=(30, 215, 96)) # Color Spotify
+    d = ImageDraw.Draw(image)
+    d.ellipse((10, 10, 54, 54), fill=(0, 0, 0)) # Un círculo negro dentro
+    return image
 
 # Configurar el menú del icono
-icon = pystray.Icon("SpotifyMuter", create_image(), "Spotify Ad Muter - By Pollito420", menu=pystray.Menu(
+icon = pystray.Icon("SpotifyMuter", create_image(), "Spotify Ad Muter", menu=pystray.Menu(
     item('Salir', quit_action)
 ))
 
