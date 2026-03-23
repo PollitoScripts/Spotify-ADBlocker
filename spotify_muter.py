@@ -10,47 +10,43 @@ from PIL import Image, ImageDraw
 import pystray
 from pystray import MenuItem as item
 
-# --- LÓGICA DE DETECCIÓN ULTRA-AGRESIVA ---
+# --- LÓGICA DE DETECCIÓN POR FORMATO "A - B" ---
 
-def get_spotify_info():
-    """Detecta si hay un anuncio basado en el título de la ventana."""
-    titles = []
-    def callback(hwnd, hwnds):
+def is_spotify_playing_music():
+    """
+    Revisa todas las ventanas de Spotify. 
+    Si encuentra al menos UNA que tenga el formato 'Artista - Canción', devuelve True.
+    """
+    found_music = False
+    
+    def callback(hwnd, extra):
+        nonlocal found_music
         if win32gui.IsWindowVisible(hwnd):
             try:
                 _, pid = win32process.GetWindowThreadProcessId(hwnd)
                 proc = psutil.Process(pid)
                 if "spotify" in proc.name().lower():
-                    text = win32gui.GetWindowText(hwnd)
-                    if text: hwnds.append(text)
+                    title = win32gui.GetWindowText(hwnd)
+                    # La regla de oro: ¿Tiene el guion de separación?
+                    if re.search(r".+ [\-\u2010\u2011\u2012\u2013\u2014\u2015] .+", title):
+                        found_music = True
             except: pass
         return True
-    
-    win32gui.EnumWindows(callback, titles)
-    
-    # Palabras clave que SIEMPRE son anuncios
-    blacklist = ["spotify", "anuncio", "advertisement", "escucha música sin anuncios", "spotify free", "spotify premium"]
-    
-    for t in titles:
-        t_lower = t.lower()
-        # 1. Si el título está en la lista negra, es anuncio.
-        if any(bad_word in t_lower for bad_word in blacklist):
-            return "Anuncio"
-        # 2. Si tiene el formato "Artista - Canción", es MÚSICA.
-        if re.search(r".+ [\-\u2010\u2011\u2012\u2013\u2014\u2015] .+", t):
-            return t
-            
-    # Si llegamos aquí y hay una ventana de Spotify pero no parece música clara, muteamos por si acaso.
-    return "Anuncio" if titles else "Nada"
+
+    win32gui.EnumWindows(callback, None)
+    return found_music
 
 def set_spotify_mute(mute_state):
-    """Mutea Spotify buscando en todas las tarjetas de sonido (ideal para Sonar/SteelSeries)."""
+    """Muteo total para atravesar SteelSeries Sonar."""
     try:
         sessions = AudioUtilities.GetAllSessions()
         for session in sessions:
-            # Buscamos por nombre de proceso o por el identificador de la sesión
             if session.Process and "spotify" in session.Process.name().lower():
+                # 1. Muteo estándar
                 session.SimpleAudioVolume.SetMute(mute_state, None)
+                # 2. Muteo de volumen maestro (para asegurar en Sonar)
+                vol = 0.0 if mute_state == 1 else 1.0
+                session.SimpleAudioVolume.SetMasterVolume(vol, None)
     except: pass
 
 # --- CONTROL Y BUCLE ---
@@ -62,20 +58,18 @@ def main_loop(icon):
     is_muted = False
     while running:
         try:
-            info = get_spotify_info()
-            
-            # Si el título indica anuncio o no detectamos música clara...
-            if info == "Anuncio":
+            # Si NO hay música con formato "A - B", entonces es un anuncio
+            if not is_spotify_playing_music():
                 if not is_muted:
                     set_spotify_mute(1)
                     is_muted = True
-            elif info != "Nada":
-                # Si detectamos música (título con guion), desmuteamos.
+            else:
+                # Si hay formato "A - B", es música, quitamos mute
                 if is_muted:
                     set_spotify_mute(0)
                     is_muted = False
         except: pass
-        time.sleep(0.8) # Más rápido para que el anuncio no suene nada
+        time.sleep(0.7) # Un poco más rápido para no oír ni el "Hola" del anuncio
 
 def quit_action(icon, item):
     global running
@@ -89,11 +83,11 @@ def create_image():
     d.ellipse((15, 15, 49, 49), fill=(0, 0, 0))
     return image
 
-icon = pystray.Icon("SpotifyMuter", create_image(), "Pollito Muter Activo", menu=pystray.Menu(
+icon = pystray.Icon("SpotifyMuter", create_image(), "Pollito Muter (Vigilando)", menu=pystray.Menu(
     item('Salir', quit_action)
 ))
 
-# Ocultar la consola negra al arrancar
+# Ocultar consola
 hWnd = ctypes.windll.kernel32.GetConsoleWindow()
 if hWnd: ctypes.windll.user32.ShowWindow(hWnd, 0)
 
