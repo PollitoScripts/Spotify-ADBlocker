@@ -10,6 +10,8 @@ Un script inteligente para Windows que detecta anuncios de Spotify y los silenci
 
 ## 🚀 Guía de Instalación Rápida
 
+Descargar spotify desde su web con su instalador, no usar el de windows store.
+
 Si el programa no abre o da errores, sigue estos pasos en orden:
 
 ### 1. Preparar el Sistema (Obligatorio)
