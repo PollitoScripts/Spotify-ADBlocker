@@ -1,0 +1,6 @@
+psutil
+pycaw
+pywin32
+pystray
+Pillow
+comtypes
