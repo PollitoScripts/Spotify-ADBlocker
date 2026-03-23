@@ -1,49 +1,38 @@
 Markdown
-# 🎵 Spotify Ad-Muter (Pollito Edition) 🐥
+# 🎵 Spotify Ad-Muter (Lite Edition) 🐥
 
-Un script inteligente y ligero para Windows que detecta automáticamente los anuncios de Spotify y los silencia en segundo plano, sin interrumpir el resto de tus sonidos (Discord, juegos, navegadores, etc.).
+Un script inteligente para Windows que detecta anuncios de Spotify y los silencia automáticamente, manteniendo el resto de tus sonidos (Discord, juegos, etc.) intactos.
 
 ## ✨ Características
+* **Silencio Selectivo:** Solo afecta a `Spotify.exe`.
+* **Modo Invisible:** Se ejecuta en la bandeja del sistema (junto al reloj).
+* **Sin Dependencias de Imagen:** El icono se genera por código, evitando errores de rutas de archivos.
 
-* **Silencio selectivo:** Solo mutea el proceso `Spotify.exe`. Tu música se detiene, pero tu charla en Discord sigue viva.
-* **Detección por Título:** Utiliza expresiones regulares (Regex) para identificar anuncios, promociones y pausas, incluso con caracteres especiales o guiones largos.
-* **Segundo Plano Total:** Se ejecuta en la bandeja del sistema (System Tray) con un icono personalizado.
-* **Sin Foco:** No necesita que la ventana de Spotify esté activa ni visible.
+## 🚀 Guía de Instalación Rápida
 
-## 🚀 Cómo usarlo
+Si el programa no abre o da errores, sigue estos pasos en orden:
 
-### Opción 1: Ejecutable (Recomendado para usuarios)
-Si solo quieres que funcione sin instalar nada:
-1. Descarga el archivo `spotify_muter.exe`.
-2. Ejecútalo (requiere permisos de administrador para controlar el mezclador de sonido).
-3. Busca el icono del **Pollito** en la barra de tareas (junto al reloj).
-4. Para cerrar, haz clic derecho en el pollito y selecciona **Salir**.
+### 1. Preparar el Sistema (Obligatorio)
+Muchos errores se deben a la falta de componentes de Windows. Instala el siguiente paquete oficial de Microsoft:
+* 🔗 [Descargar Visual C++ Redistributable X64](https://aka.ms/vs/17/release/vc_redist.x64.exe)
 
-### Opción 2: Desde el código fuente (Para desarrolladores)
-Si prefieres ejecutar el archivo `.py`, necesitarás Python 3.10+ y las siguientes librerías:
+### 2. Instalación Automática
+He incluido un archivo llamado `instalar_todo.bat`. 
+1. Haz clic derecho sobre `instalar_todo.bat`.
+2. Selecciona **Ejecutar como administrador**.
+3. Esto instalará todas las librerías necesarias (`psutil`, `pycaw`, `pystray`, etc.) automáticamente.
 
-```bash
-pip install pycaw comtypes pygetwindow pystray Pillow psutil pywin32
-Luego simplemente ejecuta:
+## 📂 Contenido del Repositorio
+* `spotify_muter.py`: El código fuente principal.
+* `spotify_muter.exe`: Ejecutable listo para usar (sin consola).
+* `requirements.txt`: Lista de librerías de Python necesarias.
+* `instalar_todo.bat`: Script de automatización para preparar el PC.
 
-Bash
-python spotify_muter.py
-🛠️ Cómo se construyó
-El proyecto utiliza:
+## 🛠️ Cómo ejecutar el programa
+* **Doble clic en `spotify_muter.exe`**: Se abrirá directamente en la bandeja del sistema.
+* **Desde la consola**: Si quieres ver qué ocurre, usa `python spotify_muter.py`.
 
-PyCaw: Para el control granular del volumen por procesos.
+> **Nota Importante:** Algunos antivirus pueden detectar el `.exe` como falso positivo. Si ocurre, añade el archivo a la lista de **Exclusiones** de tu antivirus o Windows Defender.
 
-PyWin32: Para interceptar los títulos de las ventanas nativas de Windows.
-
-PyStray: Para la interfaz en la bandeja del sistema.
-
-Regex: Para filtrar los títulos que no siguen el patrón Artista - Canción.
-
-📂 Estructura del Repositorio
-spotify_muter.py: El código fuente documentado.
-
-spotify_muter.exe: El ejecutable listo para usar.
-
-pollito_discord_CON_MARCA_DE_AGUA.ico: El icono personalizado del proyecto.
-
-Nota: Este proyecto es para uso personal y educativo. No está afiliado a Spotify.
+---
+*Proyecto creado para uso personal. No oficial de Spotify.*
