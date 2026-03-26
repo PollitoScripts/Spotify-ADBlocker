@@ -50,9 +50,11 @@ blacklist = ["gillette", "escuchar musica", "escucha musica", "sin anuncios", "a
 ## ⚠️ Notas importantes
 Ejecución como Administrador: En algunas versiones de Windows, es necesario ejecutar el script (o el CMD/Terminal) como Administrador para que tenga permisos de modificar el volumen de otros procesos.
 
+Si no quieres tener una consola visible abierta, puedes descomentar las ultimas 4 lineas para que se abra en segundo plano.
+
 Spotify de la Microsoft Store: El script es compatible con la versión de escritorio clásica y la de la Store.
 
-Creado con 🎧 por [Alejandro Tineo Morales/PollitoScripts]
+Creado por [Alejandro Tineo Morales/PollitoScripts] por y para la comunidad 🎧🎧
 
 
 ---
