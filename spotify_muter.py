@@ -124,14 +124,20 @@ icon = pystray.Icon("SpotifyMuter", create_image(), "Spotify Muter v7 By Pollito
                     menu=pystray.Menu(item('Cerrar', quit_action)))
 
 
-print("==============================================")
-print("🚀 Spotify Muter v7 [By PollitoScripts] - ACTIVADO")
-print("🎧 Buscando anuncios para silenciar...")
-print("==============================================")
+if __name__ == "__main__":
+    print("==============================================")
+    print("🚀 Spotify Muter v7 [By Pollito] - ACTIVADO")
+    print("🎧 Buscando anuncios para silenciar...")
+    print("==============================================")
 
-# Configuramos el hilo
-thread = threading.Thread(target=main_loop, args=(icon,))
-thread.daemon = True
-thread.start()
+    # Si quieres ocultar la consola automáticamente, descomenta las 4 líneas siguientes:
+    # kernel32 = ctypes.WinDLL('kernel32')
+    # user32 = ctypes.WinDLL('user32')
+    # hWnd = kernel32.GetConsoleWindow()
+    # if hWnd: user32.ShowWindow(hWnd, 0)
 
-icon.run()
+    thread = threading.Thread(target=main_loop, args=(icon,))
+    thread.daemon = True
+    thread.start()
+
+    icon.run()
