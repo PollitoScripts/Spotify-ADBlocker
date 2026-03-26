@@ -57,6 +57,7 @@ Spotify de la Microsoft Store: El script es compatible con la versión de escrit
 >=======================================================================================||<
 ||                                                                                      ||
 ||🎧🎧Creado por [Alejandro Tineo Morales/PollitoScripts] por y para la comunidad🎧🎧 ||
+||                                                                                      ||
 >=======================================================================================||<
 
 ---
