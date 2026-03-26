@@ -57,21 +57,20 @@ Spotify de la Microsoft Store: El script es compatible con la versión de escrit
 ## 🛠️ Solución de problemas comunes
 Si al ejecutar el lanzador.bat te sale un mensaje diciendo que "No se encontró Python" o te abre la Microsoft Store, sigue estos pasos:
 
-Desactiva los Alias de Windows:
+1.Desactiva los Alias de Windows:
 
-Ve a Inicio ➡️ escribe "Alias de ejecución de aplicaciones".
+1.1 Ve a Inicio ➡️ escribe "Alias de ejecución de aplicaciones".
+1.2 Busca en la lista python.exe y python3.exe.
+1.3 Desactiva ambos interruptores.
 
-Busca en la lista python.exe y python3.exe.
-
-Desactiva ambos interruptores.
-
-Reinstala con PATH:
+2.Reinstala con PATH:
 
 Si lo anterior no funciona, reinstala Python y asegúrate de marcar la casilla que dice "Add Python to PATH" al principio de la instalación.
 
-Ejecuta como Administrador:
+3.Ejecuta como Administrador:
 
 Si el script detecta los anuncios pero no los silencia, haz clic derecho en el lanzador.bat y selecciona "Ejecutar como administrador".
+
 >===========================================================||<                                                                                   
 ||🎧🎧 Creado por [Alejandro Tineo Morales/PollitoScripts] por y para la comunidad🎧🎧 ||                                                                                    
 >===========================================================||<
