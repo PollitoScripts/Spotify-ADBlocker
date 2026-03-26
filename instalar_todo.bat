@@ -1,5 +1,8 @@
 @echo off
-title Lanzador Spotify Muter v7
+title Spotify Muter v7 By Pollito
+echo ===========================================
+echo    SPOTIFY MUTER v7 - BY POLLITO
+echo ===========================================
 setlocal
 
 :: 1. Intentar localizar Python (ajusta la versión 314 si es necesario)
