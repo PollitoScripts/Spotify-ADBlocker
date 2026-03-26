@@ -28,7 +28,7 @@ Elige la opción que prefieras para poner en marcha el **Spotify ADBlocker v7**:
 ### **Opción A: Ejecución Automática (Recomendado)**
 Es la forma más rápida. El archivo `.bat` se encarga de revisar tus librerías y arrancar el script por ti:
 * **Descarga** este repositorio y descomprime el archivo `.zip`.
-* Haz doble clic en el archivo **`lanzador.bat`**.
+* Haz doble clic en el archivo **`instalador e iniciador.bat`**.
 * **¡Listo!** El script se activará y verás el icono en tu barra de tareas.
 
 ---
