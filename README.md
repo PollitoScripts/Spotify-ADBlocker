@@ -29,7 +29,7 @@ Elige la opción que prefieras para poner en marcha el **Spotify ADBlocker v7**:
 Es la forma más rápida. El archivo `.bat` se encarga de revisar tus librerías y arrancar el script por ti:
 * **Descarga** este repositorio y descomprime el archivo `.zip`.
 * Haz doble clic en el archivo **`lanzador.bat`**.
-* **¡Listo!** El script se activará y verás el icono de **Pollito** en tu barra de tareas.
+* **¡Listo!** El script se activará y verás el icono en tu barra de tareas.
 
 ---
 
