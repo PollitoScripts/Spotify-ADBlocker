@@ -11,7 +11,7 @@ Este script de Python detecta automáticamente cuando Spotify está reproduciend
 
 ## 🛠️ Requisitos previos
 
-Antes de empezar, asegúrate de tener instalado **Python 3.10 o superior**.
+Antes de empezar, asegúrate de tener instalado **Python 3.10 o superior**. (Testeado en 3.14)
 
 ### Librerías necesarias
 El script depende de las siguientes librerías de terceros:
