@@ -52,7 +52,7 @@ Ejecución como Administrador: En algunas versiones de Windows, es necesario eje
 
 Spotify de la Microsoft Store: El script es compatible con la versión de escritorio clásica y la de la Store.
 
-Creado con 🎧 por [Tu Nombre/Usuario]
+Creado con 🎧 por [Alejandro Tineo Morales/PollitoScripts]
 
 
 ---
