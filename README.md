@@ -24,7 +24,7 @@ El script depende de las siguientes librerías de terceros:
 ## 🚀 Instalación y Uso
 
 1. **Clona o descarga** este repositorio.
-2. **Instala las dependencias** ejecutando el siguiente comando en tu terminal:
+2. **Instala las dependencias** ejecutando el siguiente comando en tu terminal (En la ruta del script):
    ```bash
    pip install -r requirements.txt
 Ejecuta el script:
