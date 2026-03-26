@@ -1,40 +1,65 @@
 Markdown
-# 🎵 Spotify Ad-Muter (Lite Edition) 🐥
+# 🎵 Spotify Muter v7 (Anti-Ads)
 
-Un script inteligente para Windows que detecta anuncios de Spotify y los silencia automáticamente, manteniendo el resto de tus sonidos (Discord, juegos, etc.) intactos.
+Este script de Python detecta automáticamente cuando Spotify está reproduciendo un anuncio y silencia el proceso de audio de forma inteligente, restaurando el volumen en cuanto vuelve la música.
 
 ## ✨ Características
-* **Silencio Selectivo:** Solo afecta a `Spotify.exe`.
-* **Modo Invisible:** Se ejecuta en la bandeja del sistema (junto al reloj).
-* **Sin Dependencias de Imagen:** El icono se genera por código, evitando errores de rutas de archivos.
+* **Detección por Título:** Analiza las ventanas activas para diferenciar entre canciones y publicidad.
+* **Muteo Selectivo:** Usa `PyCaw` para silenciar solo a Spotify, sin afectar al resto del sistema.
+* **Thread-Safe:** Corregido el error de `CoInitialize` mediante `pythoncom` para ejecución estable en hilos.
+* **Icono en Bandeja:** Se ejecuta en segundo plano con un icono en la barra de tareas (System Tray).
 
-## 🚀 Guía de Instalación Rápida
+## 🛠️ Requisitos previos
 
-Descargar spotify desde su web con su instalador, no usar el de windows store.
+Antes de empezar, asegúrate de tener instalado **Python 3.10 o superior**.
 
-Si el programa no abre o da errores, sigue estos pasos en orden:
+### Librerías necesarias
+El script depende de las siguientes librerías de terceros:
+* `pywin32` (Manejo de API de Windows y COM)
+* `psutil` (Gestión de procesos)
+* `pycaw` (Control de audio de Windows)
+* `pillow` (Generación del icono)
+* `pystray` (Menú en la barra de tareas)
 
-### 1. Preparar el Sistema (Obligatorio)
-Muchos errores se deben a la falta de componentes de Windows. Instala el siguiente paquete oficial de Microsoft:
-* 🔗 [Descargar Visual C++ Redistributable X64](https://aka.ms/vs/17/release/vc_redist.x64.exe)
+## 🚀 Instalación y Uso
 
-### 2. Instalación Automática
-He incluido un archivo llamado `instalar_todo.bat`. 
-1. Haz clic derecho sobre `instalar_todo.bat`.
-2. Selecciona **Ejecutar como administrador**.
-3. Esto instalará todas las librerías necesarias (`psutil`, `pycaw`, `pystray`, etc.) automáticamente.
+1. **Clona o descarga** este repositorio.
+2. **Instala las dependencias** ejecutando el siguiente comando en tu terminal:
+   ```bash
+   pip install -r requirements.txt
+Ejecuta el script:
 
-## 📂 Contenido del Repositorio
-* `spotify_muter.py`: El código fuente principal.
-* `spotify_muter.exe`: Ejecutable listo para usar (sin consola).
-* `requirements.txt`: Lista de librerías de Python necesarias.
-* `instalar_todo.bat`: Script de automatización para preparar el PC.
+Puedes usar el archivo .bat incluido para automatizar el arranque.
 
-## 🛠️ Cómo ejecutar el programa
-* **Doble clic en `spotify_muter.exe`**: Se abrirá directamente en la bandeja del sistema.
-* **Desde la consola**: Si quieres ver qué ocurre, usa `python spotify_muter.py`.
+O directamente desde la terminal:
 
-> **Nota Importante:** Algunos antivirus pueden detectar el `.exe` como falso positivo. Si ocurre, añade el archivo a la lista de **Exclusiones** de tu antivirus o Windows Defender.
+Bash
+python spotify_muter.py
+📂 Estructura del Proyecto
+spotify_muter.py: El código principal del script.
+
+requirements.txt: Lista de dependencias de Python.
+
+lanzador.bat: Script de Windows para instalar dependencias y arrancar el muter con un clic.
+
+⚙️ Configuración (Blacklist)
+Si detectas un anuncio que el script no silencia, puedes añadir palabras clave en la lista blacklist dentro de la función get_spotify_status():
+
+Python
+blacklist = ["anuncio", "advertisement", "escucha musica sin anuncios", "patrocinado"]
+⚠️ Notas importantes
+Ejecución como Administrador: En algunas versiones de Windows, es necesario ejecutar el script (o el CMD/Terminal) como Administrador para que tenga permisos de modificar el volumen de otros procesos.
+
+Spotify de la Microsoft Store: El script es compatible con la versión de escritorio clásica y la de la Store.
+
+Creado con 🎧 por [Tu Nombre/Usuario]
+
 
 ---
-*Proyecto creado para uso personal. No oficial de Spotify.*
+
+### ¿Cómo guardar este archivo?
+1. Crea un nuevo archivo de texto en la carpeta de tu proyecto.
+2. Cámbiale el nombre a **`README.md`** (asegúrate de que no termine en `.txt`).
+3. Pega el código de arriba y guarda.
+
+**¿Te gustaría que te genere también un pequeño manual de cómo convertir todo esto en un único archivo ejecutable (.exe) para que no necesites ni el .bat ni el .py?**
