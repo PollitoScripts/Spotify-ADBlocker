@@ -59,8 +59,8 @@ Si al ejecutar el lanzador.bat te sale un mensaje diciendo que "No se encontró 
 
 1.Desactiva los Alias de Windows:
 
-1.1 Ve a Inicio ➡️ escribe "Alias de ejecución de aplicaciones".
-1.2 Busca en la lista python.exe y python3.exe.
+1.1 Ve a Inicio ➡️ escribe "Alias de ejecución de aplicaciones".||||
+1.2 Busca en la lista python.exe y python3.exe.||||
 1.3 Desactiva ambos interruptores.
 
 2.Reinstala con PATH:
