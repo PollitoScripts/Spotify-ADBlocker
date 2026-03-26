@@ -22,19 +22,39 @@ El script depende de las siguientes librerías de terceros:
 * `pystray` (Menú en la barra de tareas)
 
 ## 🚀 Instalación y Uso
+Sigue estos sencillos pasos para poner en marcha el Spotify ADBlocker v7:
 
-1. **Clona o descarga** este repositorio.
-2. **Instala las dependencias** ejecutando el siguiente comando en tu terminal (En la ruta del script):
-   ```bash
-   pip install -r requirements.txt
-Ejecuta el script:
+Opción A: Ejecución Automática (Recomendado)
+Esta es la forma más rápida. El archivo .bat se encarga de revisar tus librerías y arrancar el script por ti:
 
-Puedes usar el archivo .bat incluido para automatizar el arranque.
+Descarga este repositorio y descomprime el archivo .zip.
 
-O directamente desde la terminal:
+Haz doble clic en el archivo lanzador.bat.
+
+¡Listo! El script se activará y verás el icono de Pollito en tu barra de tareas.
+
+Opción B: Ejecución Manual (Avanzado)
+Si prefieres hacerlo tú mismo desde la terminal:
+
+Abre la terminal en la carpeta del script.
+
+Instala las dependencias necesarias:
+
+Bash
+pip install -r requirements.txt
+Inicia el silenciador:
 
 Bash
 python spotify_muter.py
+
+## 🛠️ Solución de Problemas
+Si el lanzador te da error o te abre la Microsoft Store, no te preocupes, tiene fácil solución:
+
+Desactiva los Alias de ejecución: Ve a Inicio ➡️ busca "Alias de ejecución de aplicaciones" y desactiva los interruptores de python.exe y python3.exe.
+
+Instalación de Python: Asegúrate de que al instalar Python marcaste la casilla "Add Python to PATH".
+
+Permisos: Si el script detecta los anuncios pero no los silencia, intenta ejecutar el lanzador.bat como Administrador.
 ## 📂 Estructura del Proyecto
 spotify_muter.py: El código principal del script.
 
@@ -53,23 +73,6 @@ Ejecución como Administrador: En algunas versiones de Windows, es necesario eje
 Si no quieres tener una consola visible abierta, puedes descomentar las ultimas 4 lineas para que se abra en segundo plano.
 
 Spotify de la Microsoft Store: El script es compatible con la versión de escritorio clásica y la de la Store.
-
-## 🛠️ Solución de problemas comunes
-Si al ejecutar el lanzador.bat te sale un mensaje diciendo que "No se encontró Python" o te abre la Microsoft Store, sigue estos pasos:
-
-1.Desactiva los Alias de Windows:
-
-1.1 Ve a Inicio ➡️ escribe "Alias de ejecución de aplicaciones". ||||
-1.2 Busca en la lista python.exe y python3.exe. ||||
-1.3 Desactiva ambos interruptores.
-
-2.Reinstala con PATH:
-
-Si lo anterior no funciona, reinstala Python y asegúrate de marcar la casilla que dice "Add Python to PATH" al principio de la instalación.
-
-3.Ejecuta como Administrador:
-
-Si el script detecta los anuncios pero no los silencia, haz clic derecho en el lanzador.bat y selecciona "Ejecutar como administrador".
 
 >===========================================================||<                                                                                   
 ||🎧🎧 Creado por [Alejandro Tineo Morales/PollitoScripts] por y para la comunidad🎧🎧 ||                                                                                    
