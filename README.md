@@ -35,14 +35,14 @@ O directamente desde la terminal:
 
 Bash
 python spotify_muter.py
-📂 Estructura del Proyecto
+## 📂 Estructura del Proyecto
 spotify_muter.py: El código principal del script.
 
 requirements.txt: Lista de dependencias de Python.
 
 lanzador.bat: Script de Windows para instalar dependencias y arrancar el muter con un clic.
 
-⚙️ Configuración (Blacklist)
+## ⚙️ Configuración (Blacklist)
 Si detectas un anuncio que el script no silencia, puedes añadir palabras clave en la lista blacklist dentro de la función get_spotify_status():
 
 Python
