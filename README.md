@@ -56,10 +56,3 @@ Creado con 🎧 por [Tu Nombre/Usuario]
 
 
 ---
-
-### ¿Cómo guardar este archivo?
-1. Crea un nuevo archivo de texto en la carpeta de tu proyecto.
-2. Cámbiale el nombre a **`README.md`** (asegúrate de que no termine en `.txt`).
-3. Pega el código de arriba y guarda.
-
-**¿Te gustaría que te genere también un pequeño manual de cómo convertir todo esto en un único archivo ejecutable (.exe) para que no necesites ni el .bat ni el .py?**
