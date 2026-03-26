@@ -91,10 +91,10 @@ def main_loop(icon):
         
         if status != last_status:
             if status == "Anuncio":
-                print("🚩 ANUNCIO DETECTADO -> 🔇 MUTE")
+                print("🚩 [Pollito Muter] -> 🔇 SILENCIANDO ANUNCIO") # <--- Cambio aquí
                 set_spotify_mute(True)
             else:
-                print("🎵 MÚSICA DETECTADA -> 🔊 UNMUTE")
+                print("🎵 [Pollito Muter] -> 🔊 REPRODUCIENDO MÚSICA") # <--- Cambio aquí
                 set_spotify_mute(False)
             last_status = status
             
@@ -123,6 +123,13 @@ def create_image():
 icon = pystray.Icon("SpotifyMuter", create_image(), "Spotify Muter v7 By Pollito", 
                     menu=pystray.Menu(item('Cerrar', quit_action)))
 
+
+print("==============================================")
+print("🚀 Spotify Muter v7 [By PollitoScripts] - ACTIVADO")
+print("🎧 Buscando anuncios para silenciar...")
+print("==============================================")
+
+# Configuramos el hilo
 thread = threading.Thread(target=main_loop, args=(icon,))
 thread.daemon = True
 thread.start()
