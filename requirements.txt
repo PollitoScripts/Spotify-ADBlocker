@@ -1,6 +1,5 @@
+pywin32
 psutil
 pycaw
-pywin32
+pillow
 pystray
-Pillow
-comtypes
