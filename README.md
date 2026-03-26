@@ -22,30 +22,27 @@ El script depende de las siguientes librerías de terceros:
 * `pystray` (Menú en la barra de tareas)
 
 ## 🚀 Instalación y Uso
-Sigue estos sencillos pasos para poner en marcha el Spotify ADBlocker v7:
 
-Opción A: Ejecución Automática (Recomendado)
-Esta es la forma más rápida. El archivo .bat se encarga de revisar tus librerías y arrancar el script por ti:
+Elige la opción que prefieras para poner en marcha el **Spotify ADBlocker v7**:
 
-Descarga este repositorio y descomprime el archivo .zip.
+### **Opción A: Ejecución Automática (Recomendado)**
+Es la forma más rápida. El archivo `.bat` se encarga de revisar tus librerías y arrancar el script por ti:
+* **Descarga** este repositorio y descomprime el archivo `.zip`.
+* Haz doble clic en el archivo **`lanzador.bat`**.
+* **¡Listo!** El script se activará y verás el icono de **Pollito** en tu barra de tareas.
 
-Haz doble clic en el archivo lanzador.bat.
+---
 
-¡Listo! El script se activará y verás el icono de Pollito en tu barra de tareas.
-
-Opción B: Ejecución Manual (Avanzado)
+### **Opción B: Ejecución Manual (Avanzado)**
 Si prefieres hacerlo tú mismo desde la terminal:
-
-Abre la terminal en la carpeta del script.
-
-Instala las dependencias necesarias:
-
-Bash
-pip install -r requirements.txt
-Inicia el silenciador:
-
-Bash
-python spotify_muter.py
+1. **Abre la terminal** en la carpeta del script.
+2. **Instala las dependencias** necesarias:
+   ```bash
+   pip install -r requirements.txt
+3. **Inicia el silenciador**:
+   ```bash
+   python spotify_muter.py
+(Nota: Si el comando anterior te da error, intenta usar py spotify_muter.py)
 
 ## 🛠️ Solución de Problemas
 Si el lanzador te da error o te abre la Microsoft Store, no te preocupes, tiene fácil solución:
