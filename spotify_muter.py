@@ -120,7 +120,7 @@ def create_image():
     d.ellipse((10, 10, 54, 54), fill=(0, 0, 0))
     return image
 
-icon = pystray.Icon("SpotifyMuter", create_image(), "Spotify Muter v7", 
+icon = pystray.Icon("SpotifyMuter", create_image(), "Spotify Muter v7 By Pollito", 
                     menu=pystray.Menu(item('Cerrar', quit_action)))
 
 thread = threading.Thread(target=main_loop, args=(icon,))
