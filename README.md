@@ -47,7 +47,7 @@ Si detectas un anuncio que el script no silencia, puedes añadir palabras clave 
 
 Python
 blacklist = ["anuncio", "advertisement", "escucha musica sin anuncios", "patrocinado"]
-⚠️ Notas importantes
+## ⚠️ Notas importantes
 Ejecución como Administrador: En algunas versiones de Windows, es necesario ejecutar el script (o el CMD/Terminal) como Administrador para que tenga permisos de modificar el volumen de otros procesos.
 
 Spotify de la Microsoft Store: El script es compatible con la versión de escritorio clásica y la de la Store.
