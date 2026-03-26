@@ -1,95 +1,127 @@
 import ctypes
 import time
-import re
 import threading
 import win32gui
 import win32process
 import psutil
+import unicodedata
+import pythoncom # <--- NUEVA IMPORTACIÓN
 from pycaw.pycaw import AudioUtilities
 from PIL import Image, ImageDraw
 import pystray
 from pystray import MenuItem as item
 
-# --- LÓGICA DE DETECCIÓN POR FORMATO "A - B" ---
+def eliminar_tildes(texto):
+    return "".join(c for c in unicodedata.normalize('NFD', texto)
+                  if unicodedata.category(c) != 'Mn').lower()
 
-def is_spotify_playing_music():
-    """
-    Revisa todas las ventanas de Spotify. 
-    Si encuentra al menos UNA que tenga el formato 'Artista - Canción', devuelve True.
-    """
-    found_music = False
-    
-    def callback(hwnd, extra):
-        nonlocal found_music
+def get_spotify_status():
+    titles = []
+    def callback(hwnd, hwnds):
         if win32gui.IsWindowVisible(hwnd):
             try:
                 _, pid = win32process.GetWindowThreadProcessId(hwnd)
                 proc = psutil.Process(pid)
                 if "spotify" in proc.name().lower():
-                    title = win32gui.GetWindowText(hwnd)
-                    # La regla de oro: ¿Tiene el guion de separación?
-                    if re.search(r".+ [\-\u2010\u2011\u2012\u2013\u2014\u2015] .+", title):
-                        found_music = True
+                    text = win32gui.GetWindowText(hwnd)
+                    if text: hwnds.append(text)
             except: pass
         return True
+    win32gui.EnumWindows(callback, titles)
+    
+    if not titles: return "Inactivo"
 
-    win32gui.EnumWindows(callback, None)
-    return found_music
+    blacklist = [
+        "gillette", "escuchar musica", "escucha musica", "sin anuncios", 
+        "anuncio", "advertisement", "spotify free", "spotify premium",
+        "video ad", "sponsored", "patrocinado", "disfruta", "spotify"
+    ]
+
+    es_anuncio = False
+    tiene_formato_musica = False
+    
+    # Imprimimos solo si hay cambio o algo relevante para no saturar
+    for t in titles:
+        t_limpio = eliminar_tildes(t).strip()
+        if t_limpio == "spotify" or any(bad in t_limpio for bad in blacklist):
+            es_anuncio = True
+            break
+        if " - " in t or " – " in t:
+            tiene_formato_musica = True
+
+    if es_anuncio: return "Anuncio"
+    if tiene_formato_musica: return "Musica"
+    return "Anuncio"
 
 def set_spotify_mute(mute_state):
-    """Muteo total para atravesar SteelSeries Sonar."""
+    """Barre todas las sesiones de audio y silencia Spotify"""
     try:
+        # CRUCIAL: Inicializar COM para este hilo
+        pythoncom.CoInitialize()
+        
         sessions = AudioUtilities.GetAllSessions()
+        found = False
         for session in sessions:
-            if session.Process and "spotify" in session.Process.name().lower():
-                # 1. Muteo estándar
-                session.SimpleAudioVolume.SetMute(mute_state, None)
-                # 2. Muteo de volumen maestro (para asegurar en Sonar)
-                vol = 0.0 if mute_state == 1 else 1.0
-                session.SimpleAudioVolume.SetMasterVolume(vol, None)
-    except: pass
-
-# --- CONTROL Y BUCLE ---
+            name = ""
+            if session.Process:
+                name = session.Process.name().lower()
+            
+            if "spotify" in name or "spotify" in session.Identifier.lower():
+                volume = session.SimpleAudioVolume
+                volume.SetMute(mute_state, None)
+                level = 0.0 if mute_state else 1.0
+                volume.SetMasterVolume(level, None)
+                found = True
+        
+        # Opcional: Liberar COM
+        # pythoncom.CoUninitialize() 
+    except Exception as e:
+        print(f"⚠️ Error en muteo: {e}")
 
 running = True
 
 def main_loop(icon):
     global running
-    is_muted = False
+    last_status = None
+    
+    print("🔍 Buscando anuncios de Spotify...")
+    
     while running:
-        try:
-            # Si NO hay música con formato "A - B", entonces es un anuncio
-            if not is_spotify_playing_music():
-                if not is_muted:
-                    set_spotify_mute(1)
-                    is_muted = True
+        status = get_spotify_status()
+        
+        if status != last_status:
+            if status == "Anuncio":
+                print("🚩 ANUNCIO DETECTADO -> 🔇 MUTE")
+                set_spotify_mute(True)
             else:
-                # Si hay formato "A - B", es música, quitamos mute
-                if is_muted:
-                    set_spotify_mute(0)
-                    is_muted = False
-        except: pass
-        time.sleep(0.7) # Un poco más rápido para no oír ni el "Hola" del anuncio
+                print("🎵 MÚSICA DETECTADA -> 🔊 UNMUTE")
+                set_spotify_mute(False)
+            last_status = status
+            
+        # Refuerzo constante si es anuncio
+        if status == "Anuncio":
+            set_spotify_mute(True)
+            
+        time.sleep(0.8)
 
 def quit_action(icon, item):
     global running
     running = False
-    set_spotify_mute(0)
+    # Intentar desmutear antes de salir
+    try:
+        pythoncom.CoInitialize()
+        set_spotify_mute(False)
+    except: pass
     icon.stop()
 
 def create_image():
     image = Image.new('RGB', (64, 64), color=(30, 215, 96))
     d = ImageDraw.Draw(image)
-    d.ellipse((15, 15, 49, 49), fill=(0, 0, 0))
+    d.ellipse((10, 10, 54, 54), fill=(0, 0, 0))
     return image
 
-icon = pystray.Icon("SpotifyMuter", create_image(), "Pollito Muter (Vigilando)", menu=pystray.Menu(
-    item('Salir', quit_action)
-))
-
-# Ocultar consola
-hWnd = ctypes.windll.kernel32.GetConsoleWindow()
-if hWnd: ctypes.windll.user32.ShowWindow(hWnd, 0)
+icon = pystray.Icon("SpotifyMuter", create_image(), "Spotify Muter v7", 
+                    menu=pystray.Menu(item('Cerrar', quit_action)))
 
 thread = threading.Thread(target=main_loop, args=(icon,))
 thread.daemon = True
