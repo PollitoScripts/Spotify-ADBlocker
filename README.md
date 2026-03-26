@@ -54,10 +54,8 @@ Si no quieres tener una consola visible abierta, puedes descomentar las ultimas 
 
 Spotify de la Microsoft Store: El script es compatible con la versión de escritorio clásica y la de la Store.
 
->=======================================================================================||<
-||                                                                                      ||
-||🎧🎧Creado por [Alejandro Tineo Morales/PollitoScripts] por y para la comunidad🎧🎧 ||
-||                                                                                      ||
->=======================================================================================||<
+>===============================================================||<                                                                                   
+||🎧🎧Creado por [Alejandro Tineo Morales/PollitoScripts] por y para la comunidad🎧🎧 ||                                                                                    
+>===============================================================||<
 
 ---
