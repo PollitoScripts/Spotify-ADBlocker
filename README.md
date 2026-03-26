@@ -46,7 +46,7 @@ lanzador.bat: Script de Windows para instalar dependencias y arrancar el muter c
 Si detectas un anuncio que el script no silencia, puedes añadir palabras clave en la lista blacklist dentro de la función get_spotify_status():
 
 Python
-blacklist = ["anuncio", "advertisement", "escucha musica sin anuncios", "patrocinado"]
+blacklist = ["gillette", "escuchar musica", "escucha musica", "sin anuncios", "anuncio", "advertisement", "spotify free", "spotify premium", "video ad", "sponsored", "patrocinado", "disfruta", "spotify"]
 ## ⚠️ Notas importantes
 Ejecución como Administrador: En algunas versiones de Windows, es necesario ejecutar el script (o el CMD/Terminal) como Administrador para que tenga permisos de modificar el volumen de otros procesos.
 
